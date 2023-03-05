@@ -1,4 +1,4 @@
-package theDisruptor.cards;
+package theDisruptor.cards.DisruptorDeck;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theDisruptor.DefaultMod;
 import theDisruptor.characters.TheDefault;
-import theDisruptor.characters.TheDisruptor;
 
 import static theDisruptor.DefaultMod.makeCardPath;
 // "How come this card extends CustomCard and not DynamicCard like all the rest?"
@@ -24,7 +23,7 @@ import static theDisruptor.DefaultMod.makeCardPath;
 // Abstract Dynamic Card builds up on Abstract Default Card even more and makes it so that you don't need to add
 // the NAME and the DESCRIPTION into your card - it'll get it automatically. Of course, this functionality could have easily
 // Been added to the default card rather than creating a new Dynamic one, but was done so to deliberately to showcase custom cards/inheritance a bit more.
-public class DisruptorCommonAttack extends CustomCard {
+public class DisruptorBasicStrike extends CustomCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
@@ -34,10 +33,10 @@ public class DisruptorCommonAttack extends CustomCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DefaultMod.makeID(DefaultCommonAttack.class.getSimpleName());
+    public static final String ID = DefaultMod.makeID(DisruptorBasicStrike.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
-    public static final String IMG = makeCardPath("Attack.png");
+    public static final String IMG = makeCardPath("strike.png");
     // Setting the image as as easy as can possibly be now. You just need to provide the image name
     // and make sure it's in the correct folder. That's all.
     // There's makeCardPath, makeRelicPath, power, orb, event, etc..
@@ -56,7 +55,7 @@ public class DisruptorCommonAttack extends CustomCard {
     private static final CardRarity RARITY = CardRarity.BASIC;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CardType.ATTACK;
-    public static final CardColor COLOR = TheDisruptor.Enums.COLOR_BURGUNDY;
+    public static final CardColor COLOR = TheDefault.Enums.COLOR_GRAY;
 
     private static final int COST = 1;
     private static final int DAMAGE = 6;
@@ -80,8 +79,8 @@ public class DisruptorCommonAttack extends CustomCard {
     // UnlockTracker.unlockCard(DefaultCommonAttack.ID);
     // in your main class, in the receiveEditCards() method
 
-    public DisruptorCommonAttack() {
-        super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+    public DisruptorBasicStrike() {
+        super(ID, NAME, new RegionName("blue/attack/strike"), COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         // Aside from baseDamage/MagicNumber/Block there's also a few more.
         // Just type this.base and let intelliJ auto complete for you, or, go read up AbstractCard

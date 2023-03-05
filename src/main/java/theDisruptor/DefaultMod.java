@@ -22,7 +22,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import theDisruptor.cards.*;
 import theDisruptor.characters.TheDefault;
-import theDisruptor.characters.TheDisruptor;
 import theDisruptor.events.IdentityCrisisEvent;
 import theDisruptor.potions.PlaceholderPotion;
 import theDisruptor.relics.BottledPlaceholderRelic;
@@ -113,28 +112,35 @@ public class DefaultMod implements
     private static final String ATTACK_DEFAULT_GRAY = "theDisruptorResources/images/512/bg_attack_default_gray.png";
     private static final String SKILL_DEFAULT_GRAY = "theDisruptorResources/images/512/bg_skill_default_gray.png";
     private static final String POWER_DEFAULT_GRAY = "theDisruptorResources/images/512/bg_power_default_gray.png";
-    
+    private static final String ATTACK_DISRUPTOR_BURGUNDY = "theDisruptorResources/images/512/bg_attack_disruptor_burgundy.png";
+    private static final String SKILL_DISRUPTOR_BURGUNDY = "theDisruptorResources/images/512/bg_skill_disruptor_burgundy.png";
+    private static final String POWER_DISRUPTOR_BURGUNDY = "theDisruptorResources/images/512/bg_power_disruptor_burgundy.png";
+
+
     private static final String ENERGY_ORB_DEFAULT_GRAY = "theDisruptorResources/images/512/card_default_gray_orb.png";
     private static final String CARD_ENERGY_ORB = "theDisruptorResources/images/512/card_small_orb.png";
     
     private static final String ATTACK_DEFAULT_GRAY_PORTRAIT = "theDisruptorResources/images/1024/bg_attack_default_gray.png";
     private static final String SKILL_DEFAULT_GRAY_PORTRAIT = "theDisruptorResources/images/1024/bg_skill_default_gray.png";
     private static final String POWER_DEFAULT_GRAY_PORTRAIT = "theDisruptorResources/images/1024/bg_power_default_gray.png";
+    private static final String ATTACK_DISRUPTOR_BURGUNDY_PORTRAIT = "theDisruptorResources/images/1024/bg_attack_disruptor_burgundy.png";
+    private static final String SKILL_DISRUPTOR_BURGUNDY_PORTRAIT = "theDisruptorResources/images/1024/bg_skill_disruptor_burgundy.png";
+    private static final String POWER_DISRUPTOR_BURGUNDY_PORTRAIT = "theDisruptorResources/images/1024/bg_power_disruptor_burgundy.png";
     private static final String ENERGY_ORB_DEFAULT_GRAY_PORTRAIT = "theDisruptorResources/images/1024/card_default_gray_orb.png";
     
     // Character assets
     private static final String THE_DEFAULT_BUTTON = "theDisruptorResources/images/charSelect/DefaultCharacterButton.png";
     private static final String THE_DEFAULT_PORTRAIT = "theDisruptorResources/images/charSelect/DefaultCharacterPortraitBG.png";
-    public static final String THE_DEFAULT_SHOULDER_1 = "theDisruptorResources/images/char/defaultCharacter/shoulder.png";
-    public static final String THE_DEFAULT_SHOULDER_2 = "theDisruptorResources/images/char/defaultCharacter/shoulder2.png";
-    public static final String THE_DEFAULT_CORPSE = "theDisruptorResources/images/char/defaultCharacter/corpse.png";
+    public static final String THE_DEFAULT_SHOULDER_1 = "theDisruptorResources/images/char/disruptorCharacter/shoulder.png";
+    public static final String THE_DEFAULT_SHOULDER_2 = "theDisruptorResources/images/char/disruptorCharacter/shoulder2.png";
+    public static final String THE_DEFAULT_CORPSE = "theDisruptorResources/images/char/disruptorCharacter/corpse.png";
     
     //Mod Badge - A small icon that appears in the mod settings menu next to your mod.
     public static final String BADGE_IMAGE = "theDisruptorResources/images/Badge.png";
     
     // Atlas and JSON files for the Animations
-    public static final String THE_DEFAULT_SKELETON_ATLAS = "theDisruptorResources/images/char/defaultCharacter/skeleton.atlas";
-    public static final String THE_DEFAULT_SKELETON_JSON = "theDisruptorResources/images/char/defaultCharacter/skeleton.json";
+    public static final String THE_DEFAULT_SKELETON_ATLAS = "theDisruptorResources/images/char/disruptorCharacter/idle/skeleton.atlas";
+    public static final String THE_DEFAULT_SKELETON_JSON = "theDisruptorResources/images/char/disruptorCharacter/idle/skeleton.json";
     
     // =============== MAKE IMAGE PATHS =================
     
@@ -203,12 +209,12 @@ public class DefaultMod implements
         
         logger.info("Done subscribing");
         
-        logger.info("Creating the color " + TheDisruptor.Enums.COLOR_BURGUNDY.toString());
+        logger.info("Creating the color " + TheDefault.Enums.COLOR_GRAY.toString());
         
-        BaseMod.addColor(TheDisruptor.Enums.COLOR_BURGUNDY, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
+        BaseMod.addColor(TheDefault.Enums.COLOR_GRAY, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
                 DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
-                ATTACK_DEFAULT_GRAY, SKILL_DEFAULT_GRAY, POWER_DEFAULT_GRAY, ENERGY_ORB_DEFAULT_GRAY,
-                ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
+                ATTACK_DISRUPTOR_BURGUNDY, SKILL_DISRUPTOR_BURGUNDY, POWER_DISRUPTOR_BURGUNDY, ENERGY_ORB_DEFAULT_GRAY,
+                ATTACK_DISRUPTOR_BURGUNDY_PORTRAIT, SKILL_DISRUPTOR_BURGUNDY_PORTRAIT, POWER_DISRUPTOR_BURGUNDY_PORTRAIT,
                 ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
         
         logger.info("Done creating the color");
@@ -287,18 +293,13 @@ public class DefaultMod implements
     
     @Override
     public void receiveEditCharacters() {
-
         logger.info("Beginning to edit characters. " + "Add " + TheDefault.Enums.THE_DEFAULT.toString());
         
-        BaseMod.addCharacter(new TheDefault("the Default", TheDefault.Enums.THE_DEFAULT), THE_DEFAULT_BUTTON, THE_DEFAULT_PORTRAIT, TheDefault.Enums.THE_DEFAULT);
+        BaseMod.addCharacter(new TheDefault("the Default", TheDefault.Enums.THE_DEFAULT),
+                THE_DEFAULT_BUTTON, THE_DEFAULT_PORTRAIT, TheDefault.Enums.THE_DEFAULT);
         
         receiveEditPotions();
         logger.info("Added " + TheDefault.Enums.THE_DEFAULT.toString());
-
-        logger.info("Add "+ TheDisruptor.Enums.THE_DISRUPTOR.toString());
-        BaseMod.addCharacter(new TheDisruptor("the Disruptor", TheDisruptor.Enums.THE_DISRUPTOR),
-                THE_DEFAULT_BUTTON, THE_DEFAULT_PORTRAIT, TheDisruptor.Enums.THE_DISRUPTOR);
-        logger.info("Added " + TheDisruptor.Enums.THE_DISRUPTOR.toString());
     }
     
     // =============== /LOAD THE CHARACTER/ =================
@@ -354,16 +355,16 @@ public class DefaultMod implements
 
         // Create a new event builder
         // Since this is a builder these method calls (outside of create()) can be skipped/added as necessary
-        //AddEventParams eventParams = new AddEventParams.Builder(IdentityCrisisEvent.ID, IdentityCrisisEvent.class) // for this specific event
-        //    .dungeonID(TheCity.ID) // The dungeon (act) this event will appear in
-        //    .playerClass(TheDefault.Enums.THE_DEFAULT) // Character specific event
-        //    .create();
+        AddEventParams eventParams = new AddEventParams.Builder(IdentityCrisisEvent.ID, IdentityCrisisEvent.class) // for this specific event
+            .dungeonID(TheCity.ID) // The dungeon (act) this event will appear in
+            .playerClass(TheDefault.Enums.THE_DEFAULT) // Character specific event
+            .create();
 
         // Add the event
-        //BaseMod.addEvent(eventParams);
+        BaseMod.addEvent(eventParams);
 
         // =============== /EVENTS/ =================
-        //logger.info("Done loading badge Image and mod options");
+        logger.info("Done loading badge Image and mod options");
     }
     
     // =============== / POST-INITIALIZE/ =================
@@ -376,7 +377,7 @@ public class DefaultMod implements
         // Class Specific Potion. If you want your potion to not be class-specific,
         // just remove the player class at the end (in this case the "TheDefaultEnum.THE_DEFAULT".
         // Remember, you can press ctrl+P inside parentheses like addPotions)
-        // BaseMod.addPotion(PlaceholderPotion.class, PLACEHOLDER_POTION_LIQUID, PLACEHOLDER_POTION_HYBRID, PLACEHOLDER_POTION_SPOTS, PlaceholderPotion.POTION_ID, TheDefault.Enums.THE_DEFAULT);
+        BaseMod.addPotion(PlaceholderPotion.class, PLACEHOLDER_POTION_LIQUID, PLACEHOLDER_POTION_HYBRID, PLACEHOLDER_POTION_SPOTS, PlaceholderPotion.POTION_ID, TheDefault.Enums.THE_DEFAULT);
         
         logger.info("Done editing potions");
     }
@@ -398,9 +399,9 @@ public class DefaultMod implements
         // in order to automatically differentiate which pool to add the relic too.
 
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
-        // BaseMod.addRelicToCustomPool(new PlaceholderRelic(), TheDefault.Enums.COLOR_GRAY);
-        // BaseMod.addRelicToCustomPool(new BottledPlaceholderRelic(), TheDefault.Enums.COLOR_GRAY);
-        // BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), TheDefault.Enums.COLOR_GRAY);
+        BaseMod.addRelicToCustomPool(new PlaceholderRelic(), TheDefault.Enums.COLOR_GRAY);
+        BaseMod.addRelicToCustomPool(new BottledPlaceholderRelic(), TheDefault.Enums.COLOR_GRAY);
+        BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), TheDefault.Enums.COLOR_GRAY);
         
         // This adds a relic to the Shared pool. Every character can find this relic.
         BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);

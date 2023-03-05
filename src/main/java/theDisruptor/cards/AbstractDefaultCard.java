@@ -1,5 +1,6 @@
 package theDisruptor.cards;
 import basemod.abstracts.CustomCard;
+import theDisruptor.cards.util.CardArtRoller;
 
 public abstract class AbstractDefaultCard extends CustomCard {
 
@@ -37,6 +38,27 @@ public abstract class AbstractDefaultCard extends CustomCard {
         isDefaultSecondMagicNumberModified = false;
     }
 
+    public AbstractDefaultCard(final String id,
+                               final String name,
+                               final RegionName img,
+                               final int cost,
+                               final String rawDescription,
+                               final CardType type,
+                               final CardColor color,
+                               final CardRarity rarity,
+                               final CardTarget target) {
+
+        super(id, name, img, cost, rawDescription, type, color, rarity, target);
+
+        // Set all the things to their default values.
+        isCostModified = false;
+        isCostModifiedForTurn = false;
+        isDamageModified = false;
+        isBlockModified = false;
+        isMagicNumberModified = false;
+        isDefaultSecondMagicNumberModified = false;
+    }
+
     public void displayUpgrades() { // Display the upgrade - when you click a card to upgrade it
         super.displayUpgrades();
         if (upgradedDefaultSecondMagicNumber) { // If we set upgradedDefaultSecondMagicNumber = true in our card.
@@ -50,5 +72,13 @@ public abstract class AbstractDefaultCard extends CustomCard {
         defaultBaseSecondMagicNumber += amount; // Upgrade the number by the amount you provide in your card.
         defaultSecondMagicNumber = defaultBaseSecondMagicNumber; // Set the number to be equal to the base value.
         upgradedDefaultSecondMagicNumber = true; // Upgraded = true - which does what the above method does.
+    }
+
+    public String cardArtCopy() {
+        return null;
+    }
+
+    public CardArtRoller.ReskinInfo reskinInfo(String ID) {
+        return null;
     }
 }

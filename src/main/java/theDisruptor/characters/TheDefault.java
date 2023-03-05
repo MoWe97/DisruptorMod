@@ -1,7 +1,7 @@
 package theDisruptor.characters;
 
 import basemod.abstracts.CustomPlayer;
-import basemod.animations.SpriterAnimation;
+import basemod.animations.SpineAnimation;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
@@ -23,9 +23,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import theDisruptor.DefaultMod;
 import theDisruptor.cards.*;
+import theDisruptor.cards.DisruptorDeck.DisruptorBasicDefend;
+import theDisruptor.cards.DisruptorDeck.DisruptorBasicStrike;
 import theDisruptor.relics.DefaultClickableRelic;
 import theDisruptor.relics.PlaceholderRelic;
 import theDisruptor.relics.PlaceholderRelic2;
+import theDisruptor.cards.DisruptorDeck.*;
 
 import java.util.ArrayList;
 
@@ -102,8 +105,9 @@ public class TheDefault extends CustomPlayer {
     public TheDefault(String name, PlayerClass setClass) {
         super(name, setClass, orbTextures,
                 "theDisruptorResources/images/char/defaultCharacter/orb/vfx.png", null,
-                new SpriterAnimation(
-                        "theDisruptorResources/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
+                new SpineAnimation("theDisruptorResources/images/char/disruptorCharacter/idle/skeleton.atlas", "theDisruptorResources/images/char/disruptorCharacter/idle/skeleton.json", 1f)
+                //new SpriterAnimation("theDisruptorResources/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml")
+        );
 
 
         // =============== TEXTURES, ENERGY, LOADOUT =================  
@@ -124,7 +128,7 @@ public class TheDefault extends CustomPlayer {
                 THE_DEFAULT_SKELETON_ATLAS,
                 THE_DEFAULT_SKELETON_JSON,
                 1.0f);
-        AnimationState.TrackEntry e = state.setAnimation(0, "animation", true);
+        AnimationState.TrackEntry e = state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
 
         // =============== /ANIMATIONS/ =================
@@ -156,6 +160,7 @@ public class TheDefault extends CustomPlayer {
 
         logger.info("Begin loading starter Deck Strings");
 
+        /*
         retVal.add(DefaultCommonAttack.ID);
         retVal.add(DefaultUncommonAttack.ID);
         retVal.add(DefaultRareAttack.ID);
@@ -171,6 +176,28 @@ public class TheDefault extends CustomPlayer {
         retVal.add(DefaultAttackWithVariable.ID);
         retVal.add(DefaultSecondMagicNumberSkill.ID);
         retVal.add(OrbSkill.ID);
+        return retVal;
+
+         */
+
+
+
+        retVal.add(DisruptorBasicDefend.ID);
+        retVal.add(DisruptorBasicDefend.ID);
+        retVal.add(DisruptorBasicDefend.ID);
+        retVal.add(DisruptorBasicDefend.ID);
+
+        retVal.add(DisruptorBasicStrike.ID);
+        retVal.add(DisruptorBasicStrike.ID);
+        retVal.add(DisruptorBasicStrike.ID);
+        retVal.add(DisruptorBasicStrike.ID);
+
+        retVal.add(DisruptorRareSkillEMP.ID);
+        retVal.add(DisruptorCommonSkillBackup.ID);
+        retVal.add(DisruptorUncommonSkillShackle.ID);
+        retVal.add(DisruptorCommonAttackBluntStrike.ID);
+        retVal.add(DisruptorRareAttackSystemShutdown.ID);
+
         return retVal;
     }
 
