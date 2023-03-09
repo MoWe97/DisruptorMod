@@ -1,4 +1,8 @@
 {
+  "theDisruptor:DisruptorUncommonSkillTrojan": {
+    "NAME": "Trojan",
+    "DESCRIPTION": "Apply !M! thedisruptor:Antiartifact."
+  },
   "theDisruptor:DisruptorBasicDefend": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! block."
@@ -10,7 +14,7 @@
   "theDisruptor:DisruptorCommonSkillBackup": {
     "NAME": "Backup",
     "DESCRIPTION": "Retain. NL Gain !B! Block.",
-    "UPGRADE_DESCRIPTION": "Retain. NL Gain !B! Block. NL Persist."
+    "UPGRADE_DESCRIPTION": "Retain. NL Gain !B! Block. NL thedisruptor:Persist."
   },
   "theDisruptor:DisruptorRareSkillEMP": {
     "NAME": "EMP",
@@ -26,10 +30,6 @@
     "NAME": "System Shutdown",
     "DESCRIPTION": "Deal !D! damage for each stack of Weak the enemy has. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage for each stack of Weak the enemy has."
-  },
-  "theDisruptor:DisruptorBasicAttackBluntStrike": {
-    "NAME": "Blunt Strike",
-    "DESCRIPTION": "Deal !D! damage. NL Apply !M! Weak."
   },
   "theDisruptor:DefaultCommonAttack": {
     "NAME": "Strike",

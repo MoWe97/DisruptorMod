@@ -1,6 +1,20 @@
 [
   {
     "NAMES": [
+      "Persist",
+      "persist"
+    ],
+    "DESCRIPTION": "This card comes back to your hand after being played."
+  },
+  {
+    "NAMES": [
+      "Antiartifact",
+      "antiartifact"
+    ],
+    "DESCRIPTION": "Negates the next buff."
+  },
+  {
+    "NAMES": [
       "keyword",
       "keywords"
     ],

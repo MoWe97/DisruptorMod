@@ -53,6 +53,11 @@ public class CommonPower extends AbstractPower implements CloneablePowerInterfac
 
     // On use card, apply (amount) of Dexterity. (Go to the actual power card for the amount.)
     @Override
+    public void onSpecificTrigger(){
+
+    }
+
+    @Override
     public void onUseCard(final AbstractCard card, final UseCardAction action) {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(owner, owner,
                 new DexterityPower(owner, amount), amount));
