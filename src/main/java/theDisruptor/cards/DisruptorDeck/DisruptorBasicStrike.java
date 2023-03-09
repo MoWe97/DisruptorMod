@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theDisruptor.DefaultMod;
+import theDisruptor.cards.AbstractDefaultCard;
 import theDisruptor.characters.TheDefault;
 
 import static theDisruptor.DefaultMod.makeCardPath;
@@ -23,7 +24,7 @@ import static theDisruptor.DefaultMod.makeCardPath;
 // Abstract Dynamic Card builds up on Abstract Default Card even more and makes it so that you don't need to add
 // the NAME and the DESCRIPTION into your card - it'll get it automatically. Of course, this functionality could have easily
 // Been added to the default card rather than creating a new Dynamic one, but was done so to deliberately to showcase custom cards/inheritance a bit more.
-public class DisruptorBasicStrike extends CustomCard {
+public class DisruptorBasicStrike extends AbstractDefaultCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards

@@ -1,5 +1,7 @@
 package theDisruptor.cards;
 
+import theDisruptor.cards.util.CardArtRoller;
+
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
 public abstract class AbstractDynamicCard extends AbstractDefaultCard {

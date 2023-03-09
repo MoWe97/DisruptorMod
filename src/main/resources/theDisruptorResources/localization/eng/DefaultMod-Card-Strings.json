@@ -27,7 +27,7 @@
     "DESCRIPTION": "Deal !D! damage for each stack of Weak the enemy has. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage for each stack of Weak the enemy has."
   },
-  "theDisruptor:DisruptorCommonAttackBluntStrike": {
+  "theDisruptor:DisruptorBasicAttackBluntStrike": {
     "NAME": "Blunt Strike",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! Weak."
   },

@@ -195,7 +195,7 @@ public class TheDefault extends CustomPlayer {
         retVal.add(DisruptorRareSkillEMP.ID);
         retVal.add(DisruptorCommonSkillBackup.ID);
         retVal.add(DisruptorUncommonSkillShackle.ID);
-        retVal.add(DisruptorCommonAttackBluntStrike.ID);
+        //retVal.add(DisruptorBasicAttackBluntStrike.ID);
         retVal.add(DisruptorRareAttackSystemShutdown.ID);
 
         return retVal;

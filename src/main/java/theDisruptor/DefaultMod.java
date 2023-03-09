@@ -1,6 +1,7 @@
 package theDisruptor;
 
 import basemod.*;
+import basemod.abstracts.CustomCard;
 import basemod.eventUtil.AddEventParams;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
@@ -11,12 +12,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,6 +39,7 @@ import theDisruptor.variables.DefaultSecondMagicNumber;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
@@ -519,6 +524,34 @@ public class DefaultMod implements
                 BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
                 //  getModID().toLowerCase() makes your keyword mod specific (it won't show up in other cards that use that word)
             }
+        }
+    }
+
+    @SpirePatch(
+            clz = SingleCardViewPopup.class,
+            method = "loadPortraitImg"
+    )
+
+    //makes it so it always shows the color-changed portrait
+    //of an card, when doing the popup-view
+    public static class DisruptorTextureFix {
+        public DisruptorTextureFix() {
+        }
+
+        public static void Postfix(SingleCardViewPopup __instance) {
+            try {
+                Field cardField = SingleCardViewPopup.class.getDeclaredField("card");
+                cardField.setAccessible(true);
+                AbstractCard card = (AbstractCard)cardField.get(__instance);
+                Field portraitImageField = SingleCardViewPopup.class.getDeclaredField("portraitImg");
+                portraitImageField.setAccessible(true);
+                if (card instanceof CustomCard) {
+                    portraitImageField.set(__instance, CustomCard.getPortraitImage((CustomCard)card));
+                }
+            } catch (SecurityException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException var4) {
+                var4.printStackTrace();
+            }
+
         }
     }
     

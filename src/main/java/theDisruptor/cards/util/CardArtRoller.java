@@ -177,6 +177,36 @@ public class CardArtRoller {
             CardLibrary.LibraryType.CURSE
     };
 
+    public static TextureAtlas.AtlasRegion changeTextureColor(ReskinInfo r, TextureAtlas.AtlasRegion t){
+        Color HSLC = new Color(r.H, r.S, r.L, r.C);
+        t.flip(false, true);
+        FrameBuffer fb = ImageHelper.createBuffer(250, 190);
+        OrthographicCamera og = new OrthographicCamera(250, 190);
+        SpriteBatch sb = new SpriteBatch();
+        sb.setProjectionMatrix(og.combined);
+        ImageHelper.beginBuffer(fb);
+        sb.begin();
+        if (!r.isBicolor) {
+            sb.setShader(shade);
+            sb.setColor(HSLC);
+        } else {
+            sb.setShader(bicolorShader);
+            sb.setColor(Color.WHITE);
+            setBicolorShaderValues(r);
+        }
+        sb.draw(t, -125, -95);
+        sb.end();
+        fb.end();
+        t.flip(r.flipX, true);
+        TextureRegion a = ImageHelper.getBufferTexture(fb);
+        return new TextureAtlas.AtlasRegion(a.getTexture(), 0, 0, 250, 190);
+    }
+
+    public static void computeMyCard(AbstractDefaultCard c){
+        ReskinInfo r = new ReskinInfo(c.cardID, Color.RED, Color.YELLOW, Color.CORAL, Color.LIME, true);
+        c.portrait = changeTextureColor(r,c.portrait);
+    }
+
     public static void computeCard(AbstractDefaultCard c) {
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
             ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
@@ -256,13 +286,13 @@ public class CardArtRoller {
                     }
                 }
                 if (c.reskinInfo(q) != null) {
-                    return c.reskinInfo(q);
+                    return c.reskinInfo(c.cardID);
                 } else {
                     return new ReskinInfo(q, rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.randomBoolean());
                 }
             });
             Color HSLC = new Color(r.H, r.S, r.L, r.C);
-            TextureAtlas.AtlasRegion t = CardLibrary.getCard(r.origCardID).portrait;
+            TextureAtlas.AtlasRegion t = c.portrait;
             t.flip(false, true);
             FrameBuffer fb = ImageHelper.createBuffer(250, 190);
             OrthographicCamera og = new OrthographicCamera(250, 190);

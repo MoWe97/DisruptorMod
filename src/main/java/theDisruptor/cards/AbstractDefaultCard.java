@@ -1,5 +1,9 @@
 package theDisruptor.cards;
 import basemod.abstracts.CustomCard;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import theDisruptor.cards.util.CardArtRoller;
 
 public abstract class AbstractDefaultCard extends CustomCard {
@@ -57,6 +61,17 @@ public abstract class AbstractDefaultCard extends CustomCard {
         isBlockModified = false;
         isMagicNumberModified = false;
         isDefaultSecondMagicNumberModified = false;
+
+        if (CardLibrary.getAllCards() != null && !CardLibrary.getAllCards().isEmpty()) {
+            CardArtRoller.computeCard(this);
+        }
+        //CardArtRoller.computeMyCard(this);
+
+    }
+
+    @Override
+    protected Texture getPortraitImage() {
+        return CardArtRoller.getPortraitTexture(this);
     }
 
     public void displayUpgrades() { // Display the upgrade - when you click a card to upgrade it
@@ -79,6 +94,8 @@ public abstract class AbstractDefaultCard extends CustomCard {
     }
 
     public CardArtRoller.ReskinInfo reskinInfo(String ID) {
-        return null;
+        //return new CardArtRoller.ReskinInfo(ID, Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN, true);
+        return new CardArtRoller.ReskinInfo(ID, 0.93f, 0.6f, 0.4f, 1.0f, true);
+        //return null;
     }
 }
